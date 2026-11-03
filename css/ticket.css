@@ -1,0 +1,421 @@
+/* ==========================================================================
+   EVENTORA DIGITAL PASS & BOARDING TICKET STYLES
+   Perforated boarding pass aesthetic, QR code presentation & Print Stylesheet
+   ========================================================================== */
+
+.digital-ticket-card {
+    display: flex;
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    margin: 1rem 0;
+    transition: transform var(--transition-fast);
+}
+
+.digital-ticket-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* 1. Main Pass Section */
+.ticket-main-section {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.04) 0%, transparent 100%);
+}
+
+.ticket-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ticket-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.ticket-logo-icon {
+    font-size: 1.5rem;
+}
+
+.ticket-brand-name {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+}
+
+.ticket-brand-sub {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.ticket-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-success);
+}
+
+.ticket-event-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.25;
+}
+
+.ticket-grid-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+    padding: 0.85rem;
+    background-color: var(--bg-surface-subtle);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+}
+
+.ticket-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.ticket-meta-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.ticket-meta-label i {
+    color: var(--brand-primary);
+}
+
+.ticket-meta-val {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ticket-contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.ticket-contact-row span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.ticket-barcode-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border-subtle);
+    color: var(--text-secondary);
+}
+
+.ticket-barcode-svg {
+    height: 28px;
+    opacity: 0.75;
+}
+
+.ticket-booking-ref {
+    font-family: monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--brand-primary);
+}
+
+/* 2. Perforation Line */
+.ticket-perforation {
+    width: 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.perf-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-strong);
+    position: absolute;
+    z-index: 2;
+}
+
+.perf-circle.top {
+    top: -12px;
+}
+
+.perf-circle.bottom {
+    bottom: -12px;
+}
+
+.perf-line {
+    width: 1px;
+    height: 100%;
+    border-left: 2px dashed var(--border-strong);
+}
+
+/* 3. Ticket Stub Section */
+.ticket-stub-section {
+    width: 200px;
+    background-color: var(--bg-surface-subtle);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    border-left: 1px solid transparent;
+}
+
+.stub-qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.ticket-qr-svg {
+    background-color: #ffffff;
+    color: #0f172a;
+    padding: 6px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.stub-scan-hint {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.stub-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stub-id {
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.stub-date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.ticket-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    width: 100%;
+}
+
+.btn-ticket-action {
+    flex: 1 1 45%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-fast);
+}
+
+.btn-ticket-action.btn-download {
+    background: var(--brand-gradient);
+    color: #ffffff;
+    flex: 1 1 100%;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+}
+
+.btn-ticket-action.btn-download:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+}
+
+.btn-ticket-action.btn-print {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
+}
+
+.btn-ticket-action.btn-print:hover {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+    background-color: var(--bg-surface-subtle);
+}
+
+.btn-ticket-action.btn-cancel {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--color-danger);
+}
+
+.btn-ticket-action.btn-cancel:hover {
+    background-color: var(--color-danger-bg);
+    border-color: var(--color-danger);
+}
+
+/* 4. Responsive Mobile Boarding Pass */
+@media (max-width: 720px) {
+    .digital-ticket-card {
+        flex-direction: column;
+    }
+
+    .ticket-perforation {
+        width: 100%;
+        height: 24px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .perf-circle.top {
+        left: -12px;
+        top: 0;
+    }
+
+    .perf-circle.bottom {
+        right: -12px;
+        bottom: 0;
+    }
+
+    .perf-line {
+        width: 100%;
+        height: 1px;
+        border-left: none;
+        border-top: 2px dashed var(--border-strong);
+    }
+
+    .ticket-stub-section {
+        width: 100%;
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+
+    .ticket-actions {
+        max-width: 320px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   5. Clean Print Media Stylesheet
+   -------------------------------------------------------------------------- */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    /* Hide everything on page by default */
+    body * {
+        visibility: hidden !important;
+    }
+
+    .site-header,
+    .site-footer,
+    .hero-section,
+    .filter-toolbar,
+    .events-section,
+    .modal,
+    .modal-dialog,
+    .modal-close,
+    .modal-header-banner,
+    .toast-container {
+        display: none !important;
+    }
+
+    /* Print only the targeted ticket */
+    .print-focus-ticket,
+    .print-focus-ticket * {
+        visibility: visible !important;
+    }
+
+    .print-focus-ticket {
+        display: flex !important;
+        position: fixed !important;
+        left: 50% !important;
+        top: 40px !important;
+        transform: translateX(-50%) !important;
+        width: 760px !important;
+        max-width: 95% !important;
+        border: 2px solid #0f172a !important;
+        border-radius: 16px !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        page-break-inside: avoid !important;
+        z-index: 999999 !important;
+    }
+
+    .print-focus-ticket .ticket-main-section {
+        background: #ffffff !important;
+    }
+
+    .print-focus-ticket .ticket-stub-section {
+        background: #f8fafc !important;
+        border-left: 1px dashed #cbd5e1 !important;
+    }
+
+    .print-focus-ticket .ticket-actions {
+        display: none !important;
+    }
+
+    .print-focus-ticket .ticket-qr-svg {
+        background-color: transparent !important;
+        color: #000000 !important;
+    }
+}

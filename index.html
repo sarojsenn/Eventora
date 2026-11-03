@@ -1,0 +1,575 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eventora - Official campus event discovery & digital pass hub for Kalinga Institute of Industrial Technology (KIIT), featuring KSAC and university society events.">
+    <meta name="keywords" content="KIIT events, KSAC, Kalinga Institute of Industrial Technology, Bhubaneswar, college hackathons, concerts, tickets">
+    <meta name="author" content="Eventora & KSAC KIIT">
+    <title>Eventora | KIIT Student Activity Centre (KSAC) Event Hub</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎟️</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons 6.5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/ticket.css">
+</head>
+<body>
+
+    <!-- ====================================================================
+         1. Header & Navigation
+         ==================================================================== -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="#" class="brand-logo" aria-label="Eventora Homepage">
+                <span class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></span>
+                <span>Even<span class="brand-text-accent">tora</span></span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main Navigation">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#events-section" class="nav-link">Explore Events</a>
+                <a href="#spotlight-anchor" class="nav-link">Spotlight</a>
+                <a href="#stats-anchor" class="nav-link">Highlights</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- My Tickets / Registrations Drawer Trigger -->
+                <button type="button" class="btn-tickets-nav" id="btn-open-tickets" onclick="App.openMyTicketsModal()" title="View your registered event passes">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>My Passes</span>
+                    <span class="badge-counter" id="nav-tickets-count">0</span>
+                </button>
+
+                <!-- Dark / Light Mode Toggle Button -->
+                <button type="button" class="theme-toggle-btn" aria-label="Toggle Dark and Light theme" title="Toggle theme">
+                    <i class="fa-solid fa-moon theme-icon"></i>
+                </button>
+
+                <!-- Mobile Hamburger Menu Button -->
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open mobile menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Slide-Out Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <div class="brand-logo">
+                    <span class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></span>
+                    <span>Even<span class="brand-text-accent">tora</span></span>
+                </div>
+                <button type="button" class="modal-close" id="mobile-drawer-close" aria-label="Close menu">&times;</button>
+            </div>
+            <nav class="drawer-nav">
+                <a href="#hero" class="mobile-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#events-section" class="mobile-nav-link"><i class="fa-solid fa-compass"></i> Explore Events</a>
+                <a href="#spotlight-anchor" class="mobile-nav-link"><i class="fa-solid fa-fire"></i> Weekly Spotlight</a>
+                <button type="button" class="btn-tickets-nav" onclick="App.openMyTicketsModal()" style="width: 100%; justify-content: center; margin-top: 1rem;">
+                    <i class="fa-solid fa-ticket"></i> View My Registered Passes
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         2. Hero Section & Spotlight Event
+         ==================================================================== -->
+    <section class="hero-section" id="hero">
+        <div class="container hero-grid">
+            <!-- Left Hero Content -->
+            <div class="hero-content">
+                <div class="hero-badge-pill float-badge">
+                    <i class="fa-solid fa-graduation-cap"></i> <span>Official KIIT Student Activity Centre (KSAC) Hub</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Experience Vibrant Campus Life. <span class="brand-text-accent">Connect & Grow at KIIT.</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Discover flagship hackathons, starry cultural nights, robotics showdowns, esports tournaments, and masterclasses hosted across KIIT Student Activity Centre (KSAC) & university societies. Instant scannable digital passes.
+                </p>
+
+                <!-- Embedded Hero Fast Search -->
+                <div class="hero-search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted); margin-right: 0.5rem;"></i>
+                    <input type="text" id="hero-search-input" placeholder="Search KIIT events, societies (KRS, Konnexions, Korus...), venues..." aria-label="Quick search events">
+                    <button type="button" class="btn-hero-search" id="hero-search-submit">
+                        <span>Search</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Platform Stats Row -->
+                <div class="hero-stats-row" id="stats-anchor">
+                    <div class="stat-item">
+                        <span class="stat-num">25+</span>
+                        <span class="stat-label">Campus Societies</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">40+</span>
+                        <span class="stat-label">Events Hosted</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">30,000+</span>
+                        <span class="stat-label">KIIT Students</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-label">Digital QR Passes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Spotlight Event Card with Live Countdown -->
+            <div class="spotlight-card-wrapper" id="spotlight-anchor">
+                <article class="spotlight-card">
+                    <div class="spotlight-media-wrap">
+                        <img src="" alt="Featured Spotlight Event" id="spotlight-img" class="spotlight-img">
+                        <div class="spotlight-overlay"></div>
+                        <div class="spotlight-badge-top">
+                            <i class="fa-solid fa-fire"></i> FEATURED SPOTLIGHT
+                        </div>
+                    </div>
+
+                    <div class="spotlight-body">
+                        <h2 class="spotlight-title" id="spotlight-title">Loading Featured Event...</h2>
+                        <p class="spotlight-desc" id="spotlight-desc">Event summary description</p>
+
+                        <div class="spotlight-meta">
+                            <div class="spotlight-meta-item">
+                                <i class="fa-regular fa-calendar-check"></i>
+                                <span id="spotlight-date">Upcoming Soon</span>
+                            </div>
+                            <div class="spotlight-meta-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span id="spotlight-venue">Campus Convention Hall</span>
+                            </div>
+                        </div>
+
+                        <!-- Live Countdown Dials -->
+                        <div class="spotlight-countdown-box">
+                            <div class="countdown-label">
+                                <span><span class="pulse-indicator"></span> EVENT STARTS IN</span>
+                                <span style="color: var(--brand-primary);"><i class="fa-regular fa-clock"></i> Live Countdown</span>
+                            </div>
+                            <div class="countdown-dials-grid">
+                                <div class="dial-box">
+                                    <span class="dial-number" id="spotlight-days">00</span>
+                                    <span class="dial-unit">Days</span>
+                                </div>
+                                <div class="dial-box">
+                                    <span class="dial-number" id="spotlight-hours">00</span>
+                                    <span class="dial-unit">Hours</span>
+                                </div>
+                                <div class="dial-box">
+                                    <span class="dial-number" id="spotlight-mins">00</span>
+                                    <span class="dial-unit">Mins</span>
+                                </div>
+                                <div class="dial-box">
+                                    <span class="dial-number" id="spotlight-secs">00</span>
+                                    <span class="dial-unit">Secs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spotlight-actions">
+                            <button type="button" class="btn-spotlight-primary" id="spotlight-reg-btn">
+                                <i class="fa-solid fa-ticket"></i> Reserve Your Spot
+                            </button>
+                            <button type="button" class="btn-spotlight-secondary" id="spotlight-details-btn">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         3. Events Discovery, Filter Toolbar & Catalog
+         ==================================================================== -->
+    <main class="events-section" id="events-section">
+        <div class="container">
+            <div class="section-top-bar">
+                <div class="section-tag">KIIT & KSAC SOCIETIES</div>
+                <h2 class="section-title">Upcoming Campus Events</h2>
+                <p class="section-desc">Explore flagship fests, hackathons, and tournaments hosted by KSAC & KIIT student societies.</p>
+            </div>
+
+            <!-- Primary Filter Toolbar -->
+            <div class="filter-toolbar">
+                <!-- Search Input with Clear Button -->
+                <div class="toolbar-search-row">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="events-search-input" placeholder="Search by event title, society (KRS, Konnexions, Korus...), KIIT campus venue..." aria-label="Search events catalog">
+                        <button type="button" class="btn-clear-search" id="search-clear-btn" aria-label="Clear search input">&times;</button>
+                    </div>
+                </div>
+
+                <!-- Category Pills Carousel -->
+                <div class="category-pills-row" role="tablist" aria-label="Event categories">
+                    <button type="button" class="cat-pill active" data-category="all" role="tab">
+                        <i class="fa-solid fa-star"></i> All Events
+                    </button>
+                    <button type="button" class="cat-pill" data-category="technology" role="tab">
+                        <i class="fa-solid fa-microchip"></i> Technology & AI
+                    </button>
+                    <button type="button" class="cat-pill" data-category="music" role="tab">
+                        <i class="fa-solid fa-music"></i> Music & Concerts
+                    </button>
+                    <button type="button" class="cat-pill" data-category="business" role="tab">
+                        <i class="fa-solid fa-briefcase"></i> Business & Startups
+                    </button>
+                    <button type="button" class="cat-pill" data-category="sports" role="tab">
+                        <i class="fa-solid fa-gamepad"></i> Sports & Esports
+                    </button>
+                    <button type="button" class="cat-pill" data-category="arts" role="tab">
+                        <i class="fa-solid fa-palette"></i> Arts & Culture
+                    </button>
+                    <button type="button" class="cat-pill" data-category="workshops" role="tab">
+                        <i class="fa-solid fa-brain"></i> Workshops & Seminars
+                    </button>
+                </div>
+
+                <!-- Secondary Filters: Format, Price, Sorting, Saved & View -->
+                <div class="secondary-filters-row">
+                    <div class="filter-selects-group">
+                        <!-- Format Filter -->
+                        <select id="filter-format" class="filter-select" aria-label="Filter by Event Format">
+                            <option value="all">Format: All Formats</option>
+                            <option value="in-person">In-Person</option>
+                            <option value="virtual">Virtual</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+
+                        <!-- Price Filter -->
+                        <select id="filter-price" class="filter-select" aria-label="Filter by Price">
+                            <option value="all">Price: All</option>
+                            <option value="free">Free Only</option>
+                            <option value="paid">Paid Passes</option>
+                        </select>
+
+                        <!-- Sort By -->
+                        <select id="filter-sort" class="filter-select" aria-label="Sort events by">
+                            <option value="date">Sort by: Soonest Date</option>
+                            <option value="popular">Sort by: Most Popular</option>
+                            <option value="name">Sort by: Name (A-Z)</option>
+                        </select>
+
+                        <!-- Saved Wishlist Filter -->
+                        <button type="button" class="btn-filter-saved" id="filter-saved-btn" title="View Wishlisted Events">
+                            <i class="fa-solid fa-heart"></i> Saved (<span id="filter-saved-count">0</span>)
+                        </button>
+                    </div>
+
+                    <!-- View Mode Toggle (Grid vs List) -->
+                    <div class="view-mode-group">
+                        <button type="button" class="btn-view-toggle active" id="view-grid-btn" title="Grid View" aria-label="Grid View">
+                            <i class="fa-solid fa-grip"></i>
+                        </button>
+                        <button type="button" class="btn-view-toggle" id="view-list-btn" title="List View" aria-label="List View">
+                            <i class="fa-solid fa-list-ul"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Counter Status -->
+            <div class="results-status-bar">
+                <span id="results-count">Showing 12 events</span>
+            </div>
+
+            <!-- Dynamic Events Container -->
+            <div id="events-container" class="events-grid">
+                <!-- Injected dynamically by app.js -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="empty-state">
+                <i class="fa-solid fa-magnifying-glass empty-icon"></i>
+                <h3 class="empty-title">No Events Found</h3>
+                <p class="empty-desc">We couldn't find any events matching your selected search or filter criteria. Try searching for something else or clear filters.</p>
+                <button type="button" class="btn-reset-filters" id="btn-reset-filters">Reset All Filters</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- ====================================================================
+         4. Event Details Modal
+         ==================================================================== -->
+    <div class="modal" id="details-modal" role="dialog" aria-modal="true" aria-labelledby="details-modal-title">
+        <div class="modal-dialog modal-dialog-wide">
+            <button type="button" class="modal-close" aria-label="Close details dialog">&times;</button>
+            <div id="details-modal-body">
+                <!-- Dynamically populated by app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         5. Event Registration Modal & Form Validation
+         ==================================================================== -->
+    <div class="modal" id="register-modal" role="dialog" aria-modal="true" aria-labelledby="reg-modal-title">
+        <div class="modal-dialog">
+            <button type="button" class="modal-close" aria-label="Close registration dialog">&times;</button>
+            
+            <div class="modal-header-banner">
+                <h3 class="modal-title" id="reg-modal-title">Register for Event</h3>
+                <p class="modal-subtitle">Complete your details to secure your spot and receive your digital QR pass.</p>
+            </div>
+
+            <div class="modal-body">
+                <!-- Mini event summary preview -->
+                <div class="reg-event-preview" id="reg-event-preview" style="display: none;"></div>
+
+                <!-- Registration Form -->
+                <form id="registration-form" novalidate>
+                    <!-- Participant Full Name -->
+                    <div class="form-group">
+                        <label class="form-label" for="reg-full-name">
+                            <span>Full Name <span class="form-label-req">*</span></span>
+                        </label>
+                        <div class="form-control-wrap">
+                            <i class="fa-regular fa-user field-icon"></i>
+                            <input type="text" id="reg-full-name" name="fullName" class="form-input" placeholder="e.g. Maya Patel" required autocomplete="name">
+                        </div>
+                        <div class="form-error-msg" id="err-fullName"></div>
+                    </div>
+
+                    <!-- Email & Phone 2-column grid -->
+                    <div class="form-grid-2">
+                        <!-- Email Address -->
+                        <div class="form-group">
+                            <label class="form-label" for="reg-email">
+                                <span>Email Address <span class="form-label-req">*</span></span>
+                            </label>
+                            <div class="form-control-wrap">
+                                <i class="fa-regular fa-envelope field-icon"></i>
+                                <input type="email" id="reg-email" name="email" class="form-input" placeholder="name@domain.com" required autocomplete="email">
+                            </div>
+                            <div class="form-error-msg" id="err-email"></div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <label class="form-label" for="reg-phone">
+                                <span>Mobile Number <span class="form-label-req">*</span></span>
+                            </label>
+                            <div class="form-control-wrap">
+                                <i class="fa-solid fa-phone field-icon"></i>
+                                <input type="tel" id="reg-phone" name="phone" class="form-input" placeholder="10-digit number" required autocomplete="tel">
+                            </div>
+                            <div class="form-error-msg" id="err-phone"></div>
+                        </div>
+                    </div>
+
+                    <!-- Event Select Dropdown -->
+                    <div class="form-group">
+                        <label class="form-label" for="reg-event-select">
+                            <span>Selected Event <span class="form-label-req">*</span></span>
+                        </label>
+                        <div class="form-control-wrap">
+                            <i class="fa-solid fa-calendar-check field-icon"></i>
+                            <select id="reg-event-select" name="eventId" class="form-select" required>
+                                <option value="">-- Choose an Event --</option>
+                            </select>
+                        </div>
+                        <div class="form-error-msg" id="err-eventId"></div>
+                    </div>
+
+                    <!-- Ticket Pass Type & Quantity -->
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label class="form-label" for="reg-ticket-type">
+                                <span>Ticket Pass Type <span class="form-label-req">*</span></span>
+                            </label>
+                            <div class="form-control-wrap">
+                                <i class="fa-solid fa-id-badge field-icon"></i>
+                                <select id="reg-ticket-type" name="ticketType" class="form-select" required>
+                                    <option value="General Admission">General Admission</option>
+                                    <option value="Student Pass">Student Pass (Free/Discounted)</option>
+                                    <option value="VIP All-Access">VIP All-Access Pass</option>
+                                </select>
+                            </div>
+                            <div class="form-error-msg" id="err-ticketType"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="reg-ticket-qty">
+                                <span>Pass Quantity <span class="form-label-req">*</span></span>
+                            </label>
+                            <div class="form-control-wrap">
+                                <i class="fa-solid fa-users field-icon"></i>
+                                <select id="reg-ticket-qty" name="ticketQty" class="form-select" required>
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 Persons</option>
+                                    <option value="3">3 Persons</option>
+                                    <option value="4">4 Persons</option>
+                                    <option value="5">5 Persons</option>
+                                </select>
+                            </div>
+                            <div class="form-error-msg" id="err-ticketQty"></div>
+                        </div>
+                    </div>
+
+                    <!-- Special Requirements / Notes -->
+                    <div class="form-group">
+                        <label class="form-label" for="reg-notes">
+                            <span>Special Notes or Accommodations (Optional)</span>
+                        </label>
+                        <textarea id="reg-notes" name="notes" class="form-textarea" placeholder="Dietary restrictions, wheelchair assistance, or team name..."></textarea>
+                    </div>
+
+                    <!-- Terms & Conditions Checkbox -->
+                    <div class="form-group">
+                        <label class="form-checkbox-label" for="reg-terms">
+                            <input type="checkbox" id="reg-terms" name="terms" required>
+                            <span>I agree to the Event Code of Conduct and confirm that the submitted participant information is accurate.</span>
+                        </label>
+                        <div class="form-error-msg" id="err-terms"></div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-submit-registration">
+                        <i class="fa-solid fa-ticket"></i> Confirm & Issue Digital Pass
+                    </button>
+                </form>
+
+                <!-- Registration Success Confirmation Box -->
+                <div class="registration-success-screen" id="registration-success-screen">
+                    <div class="success-badge-celebrate">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="success-heading">You're All Set!</h3>
+                    <p class="success-subtext">Your registration has been confirmed. Below is your official entry pass with scannable QR verification.</p>
+                    
+                    <!-- Dynamic Ticket Render Area -->
+                    <div id="success-pass-placeholder"></div>
+
+                    <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+                        <button type="button" class="btn-spotlight-primary" id="btn-download-latest-pass" onclick="TicketPassEngine.downloadLatestPass()">
+                            <i class="fa-solid fa-download"></i> Download Pass (PNG)
+                        </button>
+                        <button type="button" class="btn-spotlight-secondary" onclick="App.openMyTicketsModal()">
+                            <i class="fa-solid fa-ticket"></i> View All My Passes
+                        </button>
+                        <button type="button" class="btn-spotlight-secondary" onclick="App.closeModal('register-modal')">
+                            Close Window
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         6. My Passes / Tickets Modal (LocalStorage Data Manager)
+         ==================================================================== -->
+    <div class="modal" id="tickets-modal" role="dialog" aria-modal="true" aria-labelledby="tickets-modal-title">
+        <div class="modal-dialog modal-dialog-wide">
+            <button type="button" class="modal-close" aria-label="Close tickets modal">&times;</button>
+            <div class="modal-header-banner">
+                <h3 class="modal-title" id="tickets-modal-title">My Registered Event Passes</h3>
+                <p class="modal-subtitle">Manage and print your active booking credentials stored in Local Storage.</p>
+            </div>
+            <div class="modal-body">
+                <div class="my-tickets-list" id="my-tickets-list">
+                    <!-- Populated by TicketPassEngine -->
+                </div>
+
+                <div class="my-tickets-empty" id="my-tickets-empty">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <h4>No Registered Passes Yet</h4>
+                    <p style="color: var(--text-muted); margin: 0.5rem 0 1.25rem;">You haven't reserved any event tickets yet. Explore upcoming hackathons and festivals now!</p>
+                    <button type="button" class="btn-spotlight-primary" onclick="App.closeModal('tickets-modal'); document.getElementById('events-section').scrollIntoView({behavior: 'smooth'})">
+                        Browse Upcoming Events
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         7. Toast Notifications System
+         ==================================================================== -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- ====================================================================
+         8. Footer
+         ==================================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="brand-logo">
+                        <span class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></span>
+                        <span>Even<span class="brand-text-accent">tora</span></span>
+                    </div>
+                    <p class="footer-brand-desc">
+                        Eventora is the official campus event discovery and digital pass portal for Kalinga Institute of Industrial Technology (KIIT), powered by KSAC and student societies across technology, robotics, culture, arts, and sports.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#events-section">All Events</a></li>
+                        <li><a href="#spotlight-anchor">Weekly Spotlight</a></li>
+                        <li><a href="javascript:void(0)" onclick="App.openMyTicketsModal()">My Registered Passes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=technology]').click(); document.getElementById('events-section').scrollIntoView();">Technology & AI</a></li>
+                        <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=music]').click(); document.getElementById('events-section').scrollIntoView();">Music & Concerts</a></li>
+                        <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=business]').click(); document.getElementById('events-section').scrollIntoView();">Business & Startups</a></li>
+                        <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=sports]').click(); document.getElementById('events-section').scrollIntoView();">Sports & Esports</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Stay Updated</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Subscribe to receive immediate notification when registrations open for major KSAC fests.</p>
+                    <form class="footer-newsletter-box" onsubmit="event.preventDefault(); window.showToast('Thank you for subscribing to Eventora KIIT alerts!', 'success'); this.reset();">
+                        <input type="email" placeholder="Your KIIT email address" required aria-label="Newsletter email">
+                        <button type="submit" class="btn-newsletter-sub">Join</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 Eventora | KIIT Student Activity Centre (KSAC). Kalinga Institute of Industrial Technology, Bhubaneswar.</div>
+                <div>Designed with Accessibility, Responsiveness & Student Experience in Mind.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/ticket.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
